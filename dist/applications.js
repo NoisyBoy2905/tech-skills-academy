@@ -18,7 +18,7 @@ function opportunityApplicationControl(item) {
 }
 
 function applicationList() {
- if (applicationSignInRequired) return '<a class="button dark" href="/signin-with-chatgpt?return_to=%2F%23applications" target="_top">Sign in to track applications</a>';
+ if (applicationSignInRequired) return '<p>Application tracking isn’t switched on yet. It needs a login and a database, which come next.</p>';
  if (!applicationRecords) return `<p>${esc(applicationError || "Loading your applications…")}</p>`;
  if (!applicationRecords.size) return "<p>Mark a vacancy from Opportunities or add an existing application below.</p>";
  const records = [...applicationRecords.values()].sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
@@ -34,8 +34,7 @@ function applicationList() {
 }
 
 function applicationsPage() {
- return `${intro("My applications","Track applications in your signed-in account and pick up where you left off on another device.")}
- ${careerTabs()}
+ return `${intro("Applications","Keep track of roles you have applied for.","Tracker")}
  <p id="application-notice" class="small-note" role="status"></p>
  <section class="dash-section panel"><h2>Tracked applications</h2><div id="application-list">${applicationList()}</div></section>
  <section class="panel"><h2>Add an application</h2><p>Add a role you applied for outside the academy.</p>
@@ -76,7 +75,7 @@ function loadApplicationRecords() {
  applicationLoad = fetch("/api/applications",{cache:"no-store",signal:AbortSignal.timeout(12000)})
   .then(async response=>{
    applicationSignInRequired = response.status===401;
-   if (applicationSignInRequired) throw new Error("Sign in to track applications.");
+   if (applicationSignInRequired) throw new Error("Application tracking isn’t switched on yet.");
    if (!response.ok) throw new Error("Application tracking is temporarily unavailable.");
    const {applications} = await response.json();
    applicationRecords = new Map(applications.map(item=>[item.id,item]));
@@ -86,6 +85,8 @@ function loadApplicationRecords() {
    showApplicationNotice(applicationError);
   }).finally(()=>{
    applicationLoad = null;
+   // Hide the per-job status dropdowns while tracking is unavailable.
+   document.documentElement.classList.toggle("no-tracker",!applicationRecords);
    updateApplicationControls();
   });
 }

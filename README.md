@@ -1,29 +1,27 @@
 # Tech Skills Academy
 
-## Run the frontend locally
+A small personal site: live Level 5+ apprenticeship search near Dartford, selected jobs, and an applications tracker.
+The old lessons were removed and saved as a file (also in the first git commit) so they can be added back one at a time.
 
-Extract the ZIP, open a terminal in the extracted project folder, and run:
+## Run the frontend locally
 
 ```sh
 python -m http.server 8000 --directory dist
 ```
 
-Visit http://localhost:8000. The lessons, quizzes, labs and browser-local progress work in this preview. Live apprenticeship results and the signed-in applications tracker need the Worker and its hosting configuration.
+Visit http://localhost:8000. Live apprenticeship results need the Worker and its key (below).
 
-## Where to make changes
+## Files
 
 | Path | Contents |
 | --- | --- |
-| `dist/index.html`, `dist/style.css`, `dist/app.js` | HTML, styling, navigation and main screens |
-| `dist/careers.js`, `dist/career-ui.js` | Career track content and pages |
-| `dist/study-ui.js`, `dist/course.js` | Certification catalogue and CompTIA Security+ content |
-| `dist/challenges.js`, `dist/projects.js`, `dist/state.js` | Exercises, project logic and progress |
-| `dist/opportunities.js`, `dist/applications.js` | Job search and application tracking interface |
+| `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, navigation |
+| `dist/opportunities.js` | Jobs page and live apprenticeships |
+| `dist/applications.js`, `dist/application-model.js` | Applications tracker (needs login + database) |
 | `worker/`, `drizzle/` | Server APIs and the database migration |
+| `wrangler.toml` | Cloudflare Worker config |
 
-## Build and test
-
-Use Node.js 24 or newer. No npm dependencies are required.
+## Build and test (Node.js 22 or newer)
 
 ```sh
 node tests/smoke.cjs
@@ -32,4 +30,5 @@ node tests/applications.mjs
 node tests/apprenticeships.mjs
 ```
 
-The build writes `dist/server/index.js`. The hosted Worker uses a D1 database bound as `DB`, the migration at `drizzle/0000_applications.sql`, and a server-side secret called `APPRENTICESHIPS_API_KEY`. The applications API relies on the authenticated user ID supplied by the ChatGPT Sites gateway. To use another host, adapt the authentication integration to use a trusted server identity before enabling the applications API. The archive includes the original Sites project manifest for reference. Use your own project configuration for a new deployment.
+The build writes `dist/server/index.js`. Add the secret `APPRENTICESHIPS_API_KEY` in Cloudflare for live results.
+The applications API still expects the ChatGPT Sites user header, so it returns 401 until a login is added.

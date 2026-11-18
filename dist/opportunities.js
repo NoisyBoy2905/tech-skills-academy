@@ -1,5 +1,13 @@
 "use strict";
 
+// The four career areas used to filter jobs (the old lesson tracks were removed).
+const careerTracks = [
+ {id:"quant",name:"Quant development"},
+ {id:"ai",name:"AI engineering"},
+ {id:"software",name:"Software development"},
+ {id:"cyber",name:"Cybersecurity"}
+];
+
 const opportunitiesChecked = "2026-11-17";
 const apprenticeshipSite = "https://www.findapprenticeship.service.gov.uk";
 const opportunities = [
@@ -87,8 +95,7 @@ function opportunityResults(track,type,area) {
 }
 function opportunitiesPage() {
  const chosen = Object.hasOwn(opportunitySearch,part) ? part : "all";
- return `${intro("Opportunities","Find Level 5+ apprenticeships and early-career jobs related to your career tracks.")}
- ${careerTabs()}
+ return `${intro("Jobs","Level 5+ apprenticeships and early-career roles near Dartford and London.","Search")}
  <p id="application-notice" class="small-note" role="status"></p>
  <form id="opportunity-filters" class="panel form-row" aria-label="Filter opportunities">
   <label for="opportunity-track">Career track<select id="opportunity-track" name="track">

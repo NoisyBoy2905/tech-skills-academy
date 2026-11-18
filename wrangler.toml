@@ -1,0 +1,9 @@
+# Cloudflare Worker config. The build script bundles the site + API into one file.
+name = "tech-skills-academy"
+main = "dist/server/index.js"
+compatibility_date = "2025-01-01"
+
+[build]
+command = "node scripts/build-worker.mjs"
+
+# The APPRENTICESHIPS_API_KEY secret is added in the Cloudflare dashboard, not here.

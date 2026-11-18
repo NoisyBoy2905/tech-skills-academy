@@ -1,4 +1,4 @@
-import {mkdir,readFile,readdir,writeFile,copyFile} from "node:fs/promises";
+import {mkdir,readFile,readdir,writeFile} from "node:fs/promises";
 import {extname} from "node:path";
 
 const root = new URL("../",import.meta.url);
@@ -13,7 +13,5 @@ if (!assets["/index.html"]) throw new Error("Academy index.html is missing");
 const source = (await Promise.all(["dist/application-model.js","worker/applications.mjs","worker/index.mjs"]
  .map(path=>readFile(new URL(path,root),"utf8")))).join("\n");
 await mkdir(new URL("server/",dist),{recursive:true});
-await mkdir(new URL(".openai/",dist),{recursive:true});
 await writeFile(new URL("server/index.js",dist),
  `const academyAssets = ${JSON.stringify(assets)};\nacademyAssets["/"] = academyAssets["/index.html"];\n${source}`);
-await copyFile(new URL(".openai/hosting.json",root), new URL(".openai/hosting.json",dist));

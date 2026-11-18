@@ -1,5 +1,13 @@
 "use strict";
 
+// Career areas used by the Jobs filters.
+const careerTracks = [
+ {id:"quant",name:"Quant development"},
+ {id:"ai",name:"AI engineering"},
+ {id:"software",name:"Software development"},
+ {id:"cyber",name:"Cybersecurity"}
+];
+
 const opportunitiesChecked = "2026-11-17";
 const apprenticeshipSite = "https://www.findapprenticeship.service.gov.uk";
 const opportunities = [

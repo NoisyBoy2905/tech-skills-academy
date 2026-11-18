@@ -1,9 +1,11 @@
 # Tech Skills Academy
 
-A personal learning site. Pick a subject (CompTIA Security+ or a career track), read short lessons, answer a quick quiz.
-Progress is saved in the browser. Jobs (live apprenticeships) and Applications are small extras.
+A CompTIA Security+ trainer. Read a short lesson once, then keep it with spaced repetition: missed questions come back
+the same day, right answers come back after 1, 3, 7, 14 and 30 days. Progress is saved in the browser.
+Jobs (live apprenticeships) and Applications are small extras in the footer.
 
-To add lessons, edit `dist/content-security.js` (Security+) or `dist/content-careers.js` (career tracks).
+To add lessons or questions, edit `dist/content-security.js`. The career-track and reverse-engineering lessons were
+removed from the site but are in git history (commit 41dd7bf).
 
 ## Run the frontend locally
 
@@ -17,8 +19,8 @@ Visit http://localhost:8000. Live apprenticeship results need the Worker and its
 
 | Path | Contents |
 | --- | --- |
-| `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, lessons and quiz screens, progress |
-| `dist/content-security.js`, `dist/content-careers.js`, `dist/content-reverse.js` | The lessons and quiz questions |
+| `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, lessons, daily review and progress |
+| `dist/content-security.js` | The Security+ lessons and quiz questions |
 | `dist/opportunities.js` | Jobs page and live apprenticeships |
 | `dist/applications.js`, `dist/application-model.js` | Applications tracker (needs login + database) |
 | `worker/`, `drizzle/` | Server APIs and the database migration |

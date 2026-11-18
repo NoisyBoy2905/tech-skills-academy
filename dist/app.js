@@ -35,7 +35,7 @@ function buildSubjects() {
    questions:[{text:l.q, options:l.options, correct:l.correct, why:l.reason}]
   }))}]
  }));
- return [security, ...tracks];
+ return [security, ...skillSubjects, ...tracks];
 }
 const subjects = buildSubjects();
 const subjectById = id => subjects.find(s => s.id === id);
@@ -92,6 +92,7 @@ function homePage() {
  return `${intro("What do you want to learn?","Pick a subject. Each lesson is a few minutes of reading and then a quick quiz. Your progress is saved in this browser.")}
  ${resume}
  <h2 class="group-title">Certification</h2>${group("Certification")}
+ <h2 class="group-title">Skills</h2>${group("Skill")}
  <h2 class="group-title">Career tracks</h2>${group("Career track")}`;
 }
 

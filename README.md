@@ -18,7 +18,7 @@ Visit http://localhost:8000. Live apprenticeship results need the Worker and its
 | Path | Contents |
 | --- | --- |
 | `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, lessons and quiz screens, progress |
-| `dist/content-security.js`, `dist/content-careers.js` | The lessons and quiz questions |
+| `dist/content-security.js`, `dist/content-careers.js`, `dist/content-reverse.js` | The lessons and quiz questions |
 | `dist/opportunities.js` | Jobs page and live apprenticeships |
 | `dist/applications.js`, `dist/application-model.js` | Applications tracker (needs login + database) |
 | `worker/`, `drizzle/` | Server APIs and the database migration |

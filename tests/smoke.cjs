@@ -16,7 +16,7 @@ for (const file of scripts) new vm.Script(fs.readFileSync(path.join(dist, file),
 
 // Load the job-search code with a tiny fake page and check the filtering rules.
 const code = scripts.filter(f => f !== "app.js").map(f => fs.readFileSync(path.join(dist, f), "utf8")).join("\n") +
- "\n;({matchingOpportunities, opportunitySearch, opportunities, applicationUrl, domains, lessons, careerTracks})";
+ "\n;({matchingOpportunities, opportunitySearch, opportunities, applicationUrl, domains, lessons, careerTracks, skillSubjects})";
 const api = vm.runInNewContext(code, {main: {}, esc: String, icon: () => "", part: "", document: {}, fetch: () => {}});
 for (const item of api.opportunities) {
  assert(api.opportunitySearch.all && item.tracks.every(t => api.opportunitySearch[t]), "unknown track on " + item.title);
@@ -34,5 +34,9 @@ for (const l of api.lessons) {
 for (const t of api.careerTracks) for (const l of t.lessons) {
  assert(l.options[l.correct] !== undefined, "bad correct index in " + t.id + "/" + l.id);
  assert(l.concepts.length && l.example && l.reason, "incomplete lesson " + t.id + "/" + l.id);
+}
+for (const s of api.skillSubjects) for (const sec of s.sections) for (const l of sec.lessons) {
+ assert(l.ideas.length && l.example && l.questions.length, "incomplete lesson " + s.id + "/" + l.id);
+ for (const q of l.questions) assert(q.options.length >= 2 && q.options[q.correct] !== undefined && q.why, "bad question in " + s.id + "/" + l.id);
 }
 console.log("Smoke checks passed:", refs.length, "files,", api.opportunities.length, "selected vacancies.");

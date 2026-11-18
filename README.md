@@ -1,7 +1,9 @@
 # Tech Skills Academy
 
-A small personal site: live Level 5+ apprenticeship search near Dartford, selected jobs, and an applications tracker.
-The old lessons were removed and saved as a file (also in the first git commit) so they can be added back one at a time.
+A personal learning site. Pick a subject (CompTIA Security+ or a career track), read short lessons, answer a quick quiz.
+Progress is saved in the browser. Jobs (live apprenticeships) and Applications are small extras.
+
+To add lessons, edit `dist/content-security.js` (Security+) or `dist/content-careers.js` (career tracks).
 
 ## Run the frontend locally
 
@@ -15,7 +17,8 @@ Visit http://localhost:8000. Live apprenticeship results need the Worker and its
 
 | Path | Contents |
 | --- | --- |
-| `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, navigation |
+| `dist/index.html`, `dist/style.css`, `dist/app.js` | Page shell, design, lessons and quiz screens, progress |
+| `dist/content-security.js`, `dist/content-careers.js` | The lessons and quiz questions |
 | `dist/opportunities.js` | Jobs page and live apprenticeships |
 | `dist/applications.js`, `dist/application-model.js` | Applications tracker (needs login + database) |
 | `worker/`, `drizzle/` | Server APIs and the database migration |

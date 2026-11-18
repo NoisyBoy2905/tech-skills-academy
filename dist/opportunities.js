@@ -1,13 +1,5 @@
 "use strict";
 
-// The four career areas used to filter jobs (the old lesson tracks were removed).
-const careerTracks = [
- {id:"quant",name:"Quant development"},
- {id:"ai",name:"AI engineering"},
- {id:"software",name:"Software development"},
- {id:"cyber",name:"Cybersecurity"}
-];
-
 const opportunitiesChecked = "2026-11-17";
 const apprenticeshipSite = "https://www.findapprenticeship.service.gov.uk";
 const opportunities = [
